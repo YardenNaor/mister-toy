@@ -1,75 +1,23 @@
-
-
-
-import { userService } from "../services/user.service.js"
-import {toyService} from "../services/toy.service.js"
-// export const SET_TOYS = 'SET_TOYS'
-// export const REMOVE_TOY = 'REMOVE_TOY'
-// export const ADD_TOY = 'ADD_TOY'
-// export const UPDATE_TOY = 'UPDATE_TOY'
-// export const SET_TOY = 'SET_TOY'
-
-// export const SET_USER = 'SET_USER'
-// export const ADD_USER_ACTIVITY = 'ADD_USER_ACTIVITY'
-// export const UPDATE_USER_BALANCE = 'CHANGE_USER_BALANCE'
-
-// export const SET_FILTER = 'SET_FILTER'
-
-// export { createStore } from 'redux'
 import { combineReducers, legacy_createStore as createStore } from 'redux'
-const initialState = {
-//     user: userService.getLoggedinUser(),
-//     filterBy: toyService.getDefaultFilter(),
-//     toys: [],
-//     currToy: null
-}
 
-function appReducer(state = initialState, action) {
-    let toys
-    let user
-    console.log('action.type:', action.type)
-    switch (action.type) {
-    //     case SET_TOYS:
-    //         return { ...state, toys: action.toys }
-    //     case REMOVE_TOY:
-    //         // console.log('action.to:',action.to)
-    //         toys = state.toys.filter(t => t._id !== action.toyId)
-    //         return { ...state, toys }
-    //     case ADD_TOY:
-    //         console.log('action:', action)
-    //         toys = [...state.toys, action.toy]
-    //         return { ...state, toys }
-    //     case UPDATE_TOY:
-    //         toys = state.toys.map(toy => toy._id === action.toy._id ? action.toy : toy)
-    //         return { ...state, toys }
-    //     case SET_TOY:
-    //         return { ...state, currToy: action.toy }
+import { appReducer } from './app.reducer.js'
+// import { userReducer } from './user.reducer.js'
+import { toyReducer } from './toy.reducer.js'
 
+// const { createStore, combineReducers } = Redux
+const middleware = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
 
-    //     case SET_USER:
-    //         return { ...state, user: action.user }
-    //     case ADD_USER_ACTIVITY:
-    //         // console.log('action.activity:', action.activity)
-    //         const currActivities = [...state.user.activities, action.activity]
-    //         user = { ...state.user, activities: currActivities }
-    //         return { ...state, user }
-    //     case UPDATE_USER_BALANCE:
-    //         user = { ...state.user, balance: action.balance }
-    //         return { ...state, user }
+const rootReducer = combineReducers({
+    appModule: appReducer,
+    toyModule: toyReducer,
+    // userModule: userReducer
+})
 
-    //          // Filter
-    // case SET_FILTER:
-    //     return { ...state, filterBy: action.filterBy }
+export const store = createStore(rootReducer, middleware)
 
-        default:
-            return { ...state }
-    }
-}
-
-
-
-export const store = createStore(appReducer)
-
+// For debug 
 store.subscribe(() => {
-    console.log('Current state is:', store.getState())
+    // console.log('**** Store state changed: ****')
+    // console.log('storeState:\n', store.getState())
+    // console.log('*******************************')
 })

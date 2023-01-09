@@ -16,34 +16,35 @@ export const toyService = {
 }
 
 const toys = []
-_createToys()
+
 
 function query(filterBy = getDefaultFilter()) {
     // return axios.get(BASE_URL).then(res => res.data)
     return storageService.query(STORAGE_KEY)
         .then((toysFromStorage) => {
-            if (!toysFromStorage.length || !toysFromStorage) {
+            if (!toysFromStorage.length) {
+                _createToys()
                 storageService.save(STORAGE_KEY, toys)
                 return toys
             }
             return toysFromStorage
-        }).then((toys) => {
+            // }).then((toys) => {
 
-            if (filterBy.searchTxt) {
-                console.log('filterBy.searchTxt:', filterBy.searchTxt)
-                const regex = new RegExp(filterBy.searchTxt, 'i')
-                toys = toys.filter((toy) => regex.test(toy.txt))
-            }
-            if (filterBy.isDone !== null) {
-                // console.log('toys:',toys)
-                toys = toys.filter((toy) => {
-                    console.log('filterBy:', filterBy.isDone)
-                    console.log('toy.isDone:', toy.isDone)
-                    return toy.isDone === filterBy.isDone
-                })
-            }
-            console.log('toys at end of filter:', toys)
-            return toys
+            //     if (filterBy.searchTxt) {
+            //         console.log('filterBy.searchTxt:', filterBy.searchTxt)
+            //         const regex = new RegExp(filterBy.searchTxt, 'i')
+            //         toys = toys.filter((toy) => regex.test(toy.txt))
+            //     }
+            //     if (filterBy.isDone !== null) {
+            //         // console.log('toys:',toys)
+            //         toys = toys.filter((toy) => {
+            //             console.log('filterBy:', filterBy.isDone)
+            //             console.log('toy.isDone:', toy.isDone)
+            //             return toy.isDone === filterBy.isDone
+            //         })
+            //     }
+            //     console.log('toys at end of filter:', toys)
+            //     return toys
         })
 
 }
@@ -69,32 +70,34 @@ function save(toy) {
 function getEmptyToy() {
     return {
         _id: '',
-        txt: '',
-        isDone: false,
-        createdAt: Date.now()
+        name: '',
+        price: false,
+        createdAt: Date.now(),
+        lables: [],
+        inStock: true
     }
 }
 
 
 
 function _createToys() {
-    _createToy('Teddy bear',300, ["Baby","Doll","Battery Powered"])
-    _createToy('Snakes', 150, ["Box game","Art",])
-    _createToy('Train', 123, ["On wheels","Outdoor","Battery Powered"])
+    _createToy('Teddy bear', 300, ["Baby", "Doll", "Battery Powered"])
+    _createToy('Snakes', 150, ["Box game", "Art",])
+    _createToy('Train', 123, ["On wheels", "Outdoor", "Battery Powered"])
     _createToy('Mikie the poppet', 330, ["Baby", "Doll"])
-    _createToy('')
-    _createToy()
+    _createToy('A day out', 125, ["Box game", "Puzzle"])
+    _createToy('Television', 500, ["Art", "Battery Powered"])
 }
 
 
 
-function _createToy(name,price ,lables) {
+function _createToy(name, price, lables) {
     const labels = ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor", "Battery Powered"]
     const toy = {
         "_id": _makeId(),
         name,
         price,
-        labels,
+        lables,
         "createdAt": Date.now(),
         "inStock": true
     }
@@ -116,4 +119,4 @@ function _makeId(length = 6) {
     return txt
 }
 
-npx create - react - app react - pro - name
+

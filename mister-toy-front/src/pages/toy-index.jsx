@@ -4,32 +4,32 @@ import { Link } from 'react-router-dom'
 import { ToyList } from '../cmps/toy-list.jsx'
 import { ToyFilter } from '../cmps/toy-filter.jsx'
 import { toyService } from '../services/toy.service.js'
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
+// import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { loadToys, removeToy, saveToy } from '../store/toy.action.js'
 import { useEffect } from 'react'
 
 
-// export function ToyIndex() {
+export function ToyIndex() {
 //     const massage = useSelector((storeState) => storeState.massageModule.massage)
-//     const toys = useSelector((storeState) => storeState.toyModule.toys)
+    const toys = useSelector((storeState) => storeState.toyModule.toys)
 //     const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
 
 
-//     const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-//     useEffect(() => {
-//         onLoadToys()
-//     }, [])
+    useEffect(() => {
+        onLoadToys()
+    }, [])
 
-//     function onLoadToys(filterBy) {
-//         loadToys(filterBy)
-//             .then(() => {
-//                 // showSuccessMsg('Toys loaded')
-//             })
-//             .catch(err => {
-//                 showErrorMsg('Cannot load toys')
-//             })
-//     }
+    function onLoadToys() {
+        loadToys()
+            .then(() => {
+                // showSuccessMsg('Toys loaded')
+            })
+            .catch(err => {
+                // showErrorMsg('Cannot load toys')
+            })
+    }
 
 //     function onRemoveToy(toyId) {
 //         removeToy(toyId)
@@ -71,33 +71,19 @@ import { useEffect } from 'react'
 //         onLoadToys(filterBy)
 
 //     }
-
-//     return <section>
-//         <h3>Toys App</h3>
-//         <main>
-//             <PopupMenu top={<h2>Popup in Toy Index</h2>}>
-//                 <Text />
-//                 <Text />
-//                 <Text />
-//             </PopupMenu>
-//             <Link to={`/toy/edit`}>Add Toy</Link>
-//             <button onClick={onAddToy}>Add random Toy ⛐</button>
-
-//             <ToyFilter onSetFilter={setFilter} />
-//             {isLoading && <p>Loading...</p>}
-//             <ToyList
-//                 toys={toys}
-//                 onRemoveToy={onRemoveToy}
-//                 onEditToy={onEditToy}
-//                 addToToyt={addToToyt}
-//                 nums={[7, 8]}
-//                 txt={'77'}
-//             />
-//             <hr />
-//             <pre>{JSON.stringify(shoppingToyt, null, 2)}</pre>
-//         </main>
-//     </section>
+console.log('toys:',toys)
+    return <section>
+        <main>
+            <Link to={`/toy/edit`}>Add Toy</Link>
+            <ToyFilter  />
+            {/* {isLoading && <p>Loading...</p>} */}
+            <ToyList
+                toys={toys}
+            />
+            <hr />
+        </main>
+    </section>
 
 
-// }
+}
     
