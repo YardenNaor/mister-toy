@@ -1,0 +1,30 @@
+
+/* .toy-container{
+    display: felx;
+    flex-direction: column;
+} */
+
+
+.toy-list {
+    list-style: none;
+    display: flex;
+    /* flex-wrap: wrap; */  gap:10em;
+}
+
+.toy-list li {
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+  
+    /* justify-content: space-around; */
+    background-color: var(--clr1bg);
+    margin: 0.5em;
+}
+
+.check-box{
+    max-width: 30px;
+}
+
+.check-box img{
+    width: 100%;
+}
