@@ -27,23 +27,23 @@ function query(filterBy = getDefaultFilter()) {
                 return toys
             }
             return toysFromStorage
-        }).then((toys) => { 
-           
+        }).then((toys) => {
+
             if (filterBy.searchTxt) {
-                console.log('filterBy.searchTxt:',filterBy.searchTxt)
+                console.log('filterBy.searchTxt:', filterBy.searchTxt)
                 const regex = new RegExp(filterBy.searchTxt, 'i')
                 toys = toys.filter((toy) => regex.test(toy.txt))
-              }
-              if (filterBy.isDone!==null) {
+            }
+            if (filterBy.isDone !== null) {
                 // console.log('toys:',toys)
                 toys = toys.filter((toy) => {
-                    console.log('filterBy:',filterBy.isDone)
-                    console.log('toy.isDone:',toy.isDone)
-                  return  toy.isDone ===filterBy.isDone
+                    console.log('filterBy:', filterBy.isDone)
+                    console.log('toy.isDone:', toy.isDone)
+                    return toy.isDone === filterBy.isDone
                 })
-              }
-              console.log('toys at end of filter:',toys)
-              return toys
+            }
+            console.log('toys at end of filter:', toys)
+            return toys
         })
 
 }
@@ -78,27 +78,31 @@ function getEmptyToy() {
 
 
 function _createToys() {
-    _createToy('Somthing to do')
-    _createToy('I want to do it')
-    _createToy('This must be done')
-    _createToy('Do what you have to do')
-    _createToy('Do it')
-    _createToy('I do I do I do')
+    _createToy('Teddy bear',300, ["Baby","Doll","Battery Powered"])
+    _createToy('Snakes', 150, ["Box game","Art",])
+    _createToy('Train', 123, ["On wheels","Outdoor","Battery Powered"])
+    _createToy('Mikie the poppet', 330, ["Baby", "Doll"])
+    _createToy('')
+    _createToy()
 }
 
 
-function _createToy(txt) {
+
+function _createToy(name,price ,lables) {
+    const labels = ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor", "Battery Powered"]
     const toy = {
-        _id: _makeId(),
-        txt,
-        isDone: false,
-        createdAt: Date.now()
+        "_id": _makeId(),
+        name,
+        price,
+        labels,
+        "createdAt": Date.now(),
+        "inStock": true
     }
     toys.push(toy)
 }
 
 function getDefaultFilter() {
-    return { isDone:null, searchTxt: '' }
+    return { isDone: null, searchTxt: '' }
 }
 
 function _makeId(length = 6) {
@@ -112,4 +116,4 @@ function _makeId(length = 6) {
     return txt
 }
 
-// npx create-react-app react-pro-name
+npx create - react - app react - pro - name
